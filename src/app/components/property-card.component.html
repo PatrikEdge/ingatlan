@@ -1,0 +1,32 @@
+    <mat-card class="property-card" appearance="outlined">
+        <mat-card-header>
+        <mat-card-title>{{ property.title }}</mat-card-title>
+        <mat-card-subtitle>{{ property.type | titlecase }}</mat-card-subtitle>
+        </mat-card-header>
+    
+        <img
+        mat-card-image
+        [src]="property.imageUrl || 'https://via.placeholder.com/400x200?text=No+Image'"
+        alt="Property Image"
+        />
+    
+        <mat-card-content>
+        <p><strong>Ár:</strong> {{ property.price | number }} Ft</p>
+        <p><strong>Helyszín:</strong> {{ property.location }}</p>
+        <p><strong>Méret:</strong> {{ property.size }} m²</p>
+        <p>{{ property.description }}</p>
+        </mat-card-content>
+    
+        <mat-card-actions>
+        <button
+            mat-button
+            [color]="isFavorite ? 'warn' : 'primary'"
+            (click)="toggleFavorite()"
+        >
+            <mat-icon>{{ isFavorite ? 'favorite' : 'favorite_border' }}</mat-icon>
+            {{ isFavorite ? 'Eltávolítás a kedvencekből' : 'Kedvenc' }}
+        </button>
+        <button mat-button color="primary" (click)="expressInterest()">Érdekel</button>
+        </mat-card-actions>
+    </mat-card>
+    

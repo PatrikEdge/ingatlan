@@ -1,0 +1,12 @@
+<div *ngIf="favoriteProperties$ | async as properties">
+  <pre>{{ properties | json }}</pre> <!-- Debug kiírás -->
+  <div *ngIf="properties.length > 0; else noFavorites">
+    <app-property-card
+      *ngFor="let property of properties"
+      [property]="property">
+    </app-property-card>
+  </div>
+  <ng-template #noFavorites>
+    <p>Nincsenek kedvenc ingatlanok.</p>
+  </ng-template>
+</div>

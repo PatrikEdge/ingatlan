@@ -1,0 +1,65 @@
+<mat-toolbar color="primary" class="toolbar">
+    <span class="logo">IngatlanKereső</span>
+    <span class="spacer"></span>
+  
+    <button mat-button color="accent" routerLink="/interests" class="nav-btn">
+      Érdeklődéseim
+    </button>
+    
+    <button mat-button color="accent" routerLink="/favorites" class="nav-btn">
+      Kedvencek
+    </button>
+  
+    <ng-container *ngIf="(isLoggedIn | async); else loggedOut">
+      <button mat-button color="accent" routerLink="/profile" class="nav-btn">
+        Profilom
+      </button>
+  
+      <button mat-flat-button color="warn" (click)="logout()" class="nav-btn">
+        Kijelentkezés
+      </button>
+    </ng-container>
+  
+    <ng-template #loggedOut>
+      <button mat-flat-button color="accent" routerLink="/login" class="nav-btn">
+        Bejelentkezés
+      </button>
+      <button mat-stroked-button color="accent" routerLink="/register" class="nav-btn">
+        Regisztráció
+      </button>
+    </ng-template>
+  </mat-toolbar>  
+  
+  <div class="container">
+    <div class="search-form">
+        <input
+          type="text"
+          placeholder="Keresés cím vagy helyszín szerint"
+          [(ngModel)]="searchTerm"
+          (input)="applyFilters()"
+          class="search-input"
+        />
+      
+        <select [(ngModel)]="selectedType" (change)="applyFilters()" class="filter-select">
+          <option value="">Összes típus</option>
+          <option *ngFor="let t of propertyTypes" [value]="t">{{ t | titlecase }}</option>
+        </select>
+      </div>
+  
+    <div *ngIf="isLoading">
+      <p>Betöltés...</p>
+    </div>
+  
+    <div *ngIf="filteredProperties.length > 0; else noProperties" class="property-grid">
+      <app-property-card
+      *ngFor="let property of filteredProperties"
+      [property]="property"
+      (liked)="onLike($event)"
+    ></app-property-card>    
+      </div>      
+  
+    <ng-template #noProperties>
+      <p class="no-properties">Nincs megjeleníthető ingatlan.</p>
+    </ng-template>
+  </div>
+  

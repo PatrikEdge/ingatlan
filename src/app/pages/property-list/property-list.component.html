@@ -1,0 +1,17 @@
+<div class="property-grid">
+    <mat-card *ngFor="let property of properties">
+      <mat-card-header>
+        <mat-card-title>{{ property.title }}</mat-card-title>
+        <mat-card-subtitle>{{ property.location }}</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image [src]="property.imageUrl || 'https://via.placeholder.com/300'" alt="{{property.title}}">
+      <mat-card-content>
+        <p>{{ property.description }}</p>
+        <p><strong>{{ property.price }} Ft</strong></p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button color="warn" (click)="deleteProperty(property.id!)">Törlés</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  

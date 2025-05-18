@@ -1,0 +1,19 @@
+<h2>Érdeklődéseim</h2>
+
+<div *ngIf="isLoading" class="spinner">
+  <mat-spinner></mat-spinner>
+</div>
+
+<div *ngIf="!isLoading && interests.length === 0">
+  <p>Nincs elküldött érdeklődésed.</p>
+</div>
+
+<div *ngFor="let interest of interests" class="interest-card">
+  <mat-card>
+    <mat-card-title>Érdeklődés: {{ interest.propertyTitle }}</mat-card-title>
+    <mat-card-content>
+      <p><strong>Üzenet:</strong> {{ interest.message }}</p>
+      <p><strong>Időpont:</strong> {{ interest.timestamp | date:'medium' }}</p>
+    </mat-card-content>
+  </mat-card>
+</div>

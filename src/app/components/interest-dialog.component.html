@@ -1,0 +1,11 @@
+<h2>Érdeklődés: {{ data.title }}</h2>
+
+<mat-form-field appearance="fill" class="w-full" style="width: 100%;">
+  <mat-label>Üzenet</mat-label>
+  <textarea matInput [(ngModel)]="message" rows="4" placeholder="Írj üzenetet az eladó számára..."></textarea>
+</mat-form-field>
+
+<div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 16px;">
+  <button mat-button (click)="onCancel()">Mégse</button>
+  <button mat-flat-button color="primary" (click)="onSend()">Küldés</button>
+</div>

@@ -1,0 +1,30 @@
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="profile-form">
+    <mat-card>
+      <mat-card-title>Profil szerkesztése</mat-card-title>
+      <mat-card-content>
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email"/>
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Keresztnév</mat-label>
+          <input matInput formControlName="firstName" required />
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Vezetéknév</mat-label>
+          <input matInput formControlName="lastName" required />
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Új jelszó</mat-label>
+          <input matInput type="password" formControlName="password" placeholder="Csak ha változtatni szeretnéd" />
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" type="submit" [disabled]="profileForm.invalid">Mentés</button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+  

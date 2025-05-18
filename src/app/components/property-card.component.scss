@@ -1,0 +1,80 @@
+.property-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.07);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 0 16px 32px rgba(0,0,0,0.15);
+    transform: translateY(-6px);
+  }
+
+  img {
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  mat-card-header {
+    padding: 16px 24px 8px 24px;
+  }
+
+  mat-card-title {
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: #222;
+  }
+
+  mat-card-subtitle {
+    font-style: italic;
+    color: #999;
+    font-size: 0.9rem;
+  }
+
+  mat-card-content {
+    padding: 0 24px 16px 24px;
+    p {
+      margin: 8px 0;
+      font-size: 1rem;
+      color: #555;
+    }
+  }
+
+  mat-card-actions {
+    padding: 0 24px 20px 24px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+
+    button {
+      border-radius: 24px;
+      font-weight: 600;
+      padding: 6px 20px;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+
+      &:hover {
+        box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        transform: translateY(-2px);
+      }
+    }
+  }
+}
+
+.property-card {
+  position: relative;
+  /* egyéb stílusok */
+  button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+}
+
+.snackbar-success {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+
