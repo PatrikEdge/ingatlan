@@ -5,7 +5,7 @@
     <button mat-button color="accent" routerLink="/interests" class="nav-btn">
       Érdeklődéseim
     </button>
-    
+
     <button mat-button color="accent" routerLink="/favorites" class="nav-btn">
       Kedvencek
     </button>
@@ -32,19 +32,56 @@
   
   <div class="container">
     <div class="search-form">
-        <input
-          type="text"
-          placeholder="Keresés cím vagy helyszín szerint"
-          [(ngModel)]="searchTerm"
-          (input)="applyFilters()"
-          class="search-input"
-        />
-      
-        <select [(ngModel)]="selectedType" (change)="applyFilters()" class="filter-select">
-          <option value="">Összes típus</option>
-          <option *ngFor="let t of propertyTypes" [value]="t">{{ t | titlecase }}</option>
-        </select>
-      </div>
+  <input
+    type="text"
+    placeholder="Keresés cím vagy helyszín szerint"
+    [(ngModel)]="searchTerm"
+    (input)="applyFilters()"
+    class="search-input"
+  />
+
+  <select [(ngModel)]="selectedType" (change)="applyFilters()" class="filter-select">
+    <option value="">Összes típus</option>
+    <option *ngFor="let t of propertyTypes" [value]="t">{{ t | titlecase }}</option>
+  </select>
+
+  <!-- Ár szűrők -->
+  <input
+    type="number"
+    placeholder="Minimum ár"
+    [(ngModel)]="minPrice"
+    (input)="applyFilters()"
+    class="filter-input"
+    min="0"
+  />
+  <input
+    type="number"
+    placeholder="Maximum ár"
+    [(ngModel)]="maxPrice"
+    (input)="applyFilters()"
+    class="filter-input"
+    min="0"
+  />
+
+  <!-- Méret szűrők -->
+  <input
+    type="number"
+    placeholder="Minimum méret (nm)"
+    [(ngModel)]="minSize"
+    (input)="applyFilters()"
+    class="filter-input"
+    min="0"
+  />
+  <input
+    type="number"
+    placeholder="Maximum méret (nm)"
+    [(ngModel)]="maxSize"
+    (input)="applyFilters()"
+    class="filter-input"
+    min="0"
+  />
+</div>
+
   
     <div *ngIf="isLoading">
       <p>Betöltés...</p>

@@ -5,16 +5,17 @@
         </mat-card-header>
     
         <img
-        mat-card-image
-        [src]="property.imageUrl || 'https://via.placeholder.com/400x200?text=No+Image'"
-        alt="Property Image"
-        />
+  mat-card-image
+  [src]="property.imageUrl || 'https://via.placeholder.com/400x200?text=No+Image'"
+  alt="Property Image"
+/> <!-- 💡 záró per jel a végén -->
+
     
         <mat-card-content>
-        <p><strong>Ár:</strong> {{ property.price | number }} Ft</p>
+            <p>Ár: {{ property.price | currencyFormat }}</p>
         <p><strong>Helyszín:</strong> {{ property.location }}</p>
         <p><strong>Méret:</strong> {{ property.size }} m²</p>
-        <p>{{ property.description }}</p>
+        <p>{{ property.description | truncate:50 }}</p>
         </mat-card-content>
     
         <mat-card-actions>

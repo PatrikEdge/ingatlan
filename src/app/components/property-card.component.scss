@@ -77,4 +77,10 @@
   color: #fff;
 }
 
+::ng-deep mat-card img {
+  object-fit: cover;
+  height: 200px;
+}
+
+
 

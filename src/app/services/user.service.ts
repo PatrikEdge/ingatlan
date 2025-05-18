@@ -26,8 +26,8 @@ export class UserService {
 
   updateUser(id: string, data: Partial<User>): Promise<void> {
     const userDoc = doc(this.firestore, `${this.collectionName}/${id}`);
-    return updateDoc(userDoc, data);
-  }
+    return setDoc(userDoc, data, { merge: true });
+  }  
 
   deleteUser(id: string): Promise<void> {
     const userDoc = doc(this.firestore, `${this.collectionName}/${id}`);

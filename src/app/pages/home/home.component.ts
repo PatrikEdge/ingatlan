@@ -20,58 +20,69 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-    properties: Property[] = [];
-    filteredProperties: Property[] = [];
-  
-    searchTerm: string = '';
-    selectedType: string = '';
-    propertyTypes: string[] = ['apartman', 'ház', 'lakás', 'üzlet']; // példák, módosítsd a saját típusaid szerint
-  
-    isLoading = true;
-    isLoggedIn: Observable<boolean>;
-  
-    constructor(
-      private authService: AuthService,
-      private snackBar: MatSnackBar,
-      private propertyService: PropertyService,
-      private dialog: MatDialog,
-    ) {
-      this.isLoggedIn = this.authService.isLoggedIn();
-    }
-  
-    ngOnInit() {
-      this.propertyService.getProperties().subscribe(props => {
-        this.properties = props;
-        this.filteredProperties = [...this.properties];
-        this.isLoading = false;
-      });
-    }
-  
-    applyFilters() {
-      this.filteredProperties = this.properties.filter(p => {
-        const matchesSearch = this.searchTerm
-          ? p.title.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-            p.location.toLowerCase().includes(this.searchTerm.toLowerCase())
-          : true;
-  
-        const matchesType = this.selectedType ? p.type === this.selectedType : true;
-  
-        return matchesSearch && matchesType;
-      });
-    }
-  
-    logout() {
-      this.authService.logout().then(() => {
-        this.snackBar.open('Sikeres kijelentkezés!', '', {
-          duration: 3000,
-          panelClass: ['snackbar-success'],
-          horizontalPosition: 'right',
-          verticalPosition: 'bottom'
-        });
-      });
-    }
-  
-    onLike(propertyId: string) {
-      console.log('Kedvenc lett: ', propertyId);
-    }
+  properties: Property[] = [];
+  filteredProperties: Property[] = [];
+
+  searchTerm: string = '';
+  selectedType: string = '';
+  propertyTypes: string[] = ['apartman', 'ház', 'lakás', 'üzlet']; // módosítsd a saját típusaid szerint
+
+  minPrice?: number;
+  maxPrice?: number;
+  minSize?: number;
+  maxSize?: number;
+
+  isLoading = true;
+  isLoggedIn: Observable<boolean>;
+
+  constructor(
+    private authService: AuthService,
+    private snackBar: MatSnackBar,
+    private propertyService: PropertyService,
+    private dialog: MatDialog,
+  ) {
+    this.isLoggedIn = this.authService.isLoggedIn();
   }
+
+  ngOnInit() {
+    this.propertyService.getProperties().subscribe(props => {
+      this.properties = props;
+      this.filteredProperties = [...this.properties];
+      this.isLoading = false;
+    });
+  }
+
+  applyFilters() {
+    this.filteredProperties = this.properties.filter(p => {
+      const matchesSearch = this.searchTerm
+        ? p.title.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+          p.location.toLowerCase().includes(this.searchTerm.toLowerCase())
+        : true;
+
+      const matchesType = this.selectedType ? p.type === this.selectedType : true;
+
+      const matchesMinPrice = this.minPrice != null ? p.price >= this.minPrice : true;
+      const matchesMaxPrice = this.maxPrice != null ? p.price <= this.maxPrice : true;
+
+      const matchesMinSize = this.minSize != null ? p.size >= this.minSize : true;
+      const matchesMaxSize = this.maxSize != null ? p.size <= this.maxSize : true;
+
+      return matchesSearch && matchesType && matchesMinPrice && matchesMaxPrice && matchesMinSize && matchesMaxSize;
+    });
+  }
+
+  logout() {
+    this.authService.logout().then(() => {
+      this.snackBar.open('Sikeres kijelentkezés!', '', {
+        duration: 3000,
+        panelClass: ['snackbar-success'],
+        horizontalPosition: 'right',
+        verticalPosition: 'bottom'
+      });
+    });
+  }
+
+  onLike(propertyId: string) {
+    console.log('Kedvenc lett: ', propertyId);
+  }
+}

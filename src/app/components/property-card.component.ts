@@ -13,6 +13,8 @@ import { InterestService } from '../services/interest.service';
 import { Interest } from '../models/interest.model';
 import { MatDialog } from '@angular/material/dialog';
 import { InterestDialogComponent } from '../components/interest-dialog.component';
+import { CurrencyFormatPipe } from '../pipes/currency-format.pipe';
+import { TruncatePipe } from '../pipes/truncate.pipe';
 
 @Component({
   selector: 'app-property-card',
@@ -23,7 +25,9 @@ import { InterestDialogComponent } from '../components/interest-dialog.component
     MatButtonModule,
     RouterModule,
     MatIconModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    CurrencyFormatPipe,
+    TruncatePipe
   ],
   templateUrl: './property-card.component.html',
 })
